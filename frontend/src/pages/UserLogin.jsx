@@ -1,63 +1,211 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+// import React, { useState } from "react";
+// import { Link, useNavigate } from "react-router-dom";
+// import { UserDataContext } from "../Context/userContext";
+
+// import axios from "axios";
+// const UserLogin = () => {
+//   const [email, setEmail] = useState("");
+//   const [Password, setPassword] = useState("");
+//   const [userData, setUserData] = useState({});
+
+//   const { user, setUser } = React.useContext(UserDataContext);
+//   const navigate = useNavigate();
+//   const handleSubmit = (e) => {
+//     e.preventDefault();
+//     const userData = {
+//       email: email,
+//       Password: Password,
+//     };
+
+//     const response = axios.post(
+//       `${import.meta.env.VITE_BASE_URL}/users/login`,
+//       userData
+//     );
+//     console.log(response);
+
+//     if (response === 201) {
+//       const data = response.data;
+//       setUser(data.user);
+//       navigate("/home");
+//     }
+
+//     setEmail("");
+//     setPassword("");
+//   };
+//   return (
+//     <div className="p-7 flex flex-col justify-between">
+//       <div>
+//         <img
+//           className="w-16 mb-10"
+//           src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Uber_logo_2018.png"
+//           alt=""
+//         />
+
+//         <form onSubmit={(e) => handleSubmit(e)}>
+//           <h3 className="text-lg font-medium mb-2 ">What's your email</h3>
+//           <input
+//             type="email"
+//             required
+//             value={email}
+//             onChange={(e) => setEmail(e.target.value)}
+//             className="bg-[#eeeeee] mb-7 rounded px-4 w-full text-lg placeholder:text:base py-4"
+//             placeholder="email@gmail.com"
+//           />
+//           <h3>Enter Password</h3>
+//           <input
+//             type="password"
+//             required
+//             value={Password}
+//             onChange={(e) => setPassword(e.target.value)}
+//             className="bg-[#eeeeee] mb-7 rounded px-4 w-full text-lg placeholder:text:base py-4"
+//             placeholder="password"
+//           />
+//           <button className="bg-[#111] text-white mb-7 font-semibold rounded px-4 w-full text-lg placeholder:text:base py-4">
+//             login
+//           </button>
+//           <p>
+//             New here?{" "}
+//             <Link to="/signup" className="text-blue-600">
+//               Create New account
+//             </Link>
+//           </p>
+//         </form>
+//       </div>
+
+//       <div>
+//         <Link
+//           to="/captain-login"
+//           className="bg-[#10b461] flex items-center justify-center  text-white mb-7 font-semibold rounded px-4 w-full text-lg placeholder:text:base py-4"
+//         >
+//           Sign in as captain
+//         </Link>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default UserLogin;
+import React, { useState ,useContext} from 'react'
+import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
+import { UserDataContext } from '../context/UserContext'
 const UserLogin = () => {
-  const [email,setEmail]=useState('')
-  const [Password,setPassword]=useState('')
-  const [userData,setUserData]=useState({})
+//   const [ email, setEmail ] = useState('')
+//   const [ password, setPassword ] = useState('')
+//   const [ userData, setUserData ] = useState({})
 
-  const handleSubmit=(e)=>{
-e.preventDefault()
-// console.log(Email,Password);
-setUserData({
-  email:email,
-  Password:Password
-})
-console.log(userData);
+//   const { user, setUser } =useContext(UserDataContext)
+//   const navigate = useNavigate()
 
-setEmail('')
-setPassword('')
 
+
+//   const submitHandler = async (e) => {
+//     e.preventDefault();
+
+//     const userData = {
+//       email: email,
+//       password: password
+//     }
+
+//     const response = await axios.post("http://localhost:5000/users/login", userData)
+// console.log(response);
+
+//     if (response.status === 200) {
+//       const data = response.data
+//       setUser(data.user)
+//       localStorage.setItem('token', data.token)
+//       navigate('/home')
+//     }
+const [ email, setEmail ] = useState('')
+  const [ password, setPassword ] = useState('')
+ 
+  const [ userData, setUserData ] = useState({})
+
+  const navigate = useNavigate()
+
+
+
+  const { user, setUser } = useContext(UserDataContext)
+
+
+
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    const userData = {
+      email: email,
+      password: password
+    }
+    console.log(userData);
+    
+    try {
+      const response = await axios.post("http://localhost:5000/users/login", userData);
+      console.log(response);
+      if (response.status === 201) {
+        const data = response.data
+        setUser(data.user)
+        localStorage.setItem('token', data.token)
+        navigate('/home')
+      }
+      
+  } catch (error) {
+      console.error('Error in registration:', error);
   }
+  
+
+    setEmail('')
+    setPassword('')
+  }
+
   return (
-    <div className="p-7 flex flex-col justify-between">
-      <div>
-        <img
-          className="w-16 mb-10"
-          src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Uber_logo_2018.png"
-          alt=""
+    <div className='p-7 h-screen flex flex-col justify-between'>
+    <div>
+      <img className='w-16 mb-10' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYQy-OIkA6In0fTvVwZADPmFFibjmszu2A0g&s" alt="" />
+
+      <form onSubmit={(e) => {
+        submitHandler(e)
+      }}>
+        <h3 className='text-lg font-medium mb-2'>What's your email</h3>
+        <input
+          required
+          value={email}
+          onChange={(e) => {
+            setEmail(e.target.value)
+          }}
+          className='bg-[#eeeeee] mb-7 rounded-lg px-4 py-2 border w-full text-lg placeholder:text-base'
+          type="email"
+          placeholder='email@example.com'
         />
 
-        <form onSubmit={(e)=>handleSubmit(e)}>
-          <h3 className="text-lg font-medium mb-2 ">What's your email</h3>
-          <input
-            type="email"
-            required
-            value={email}
-            onChange={(e)=>setEmail(e.target.value)}
-            className="bg-[#eeeeee] mb-7 rounded px-4 w-full text-lg placeholder:text:base py-4"
-            placeholder="email@gmail.com"
-          />
-          <h3>Enter Password</h3>
-          <input
-            type="password"
-            required
-            value={Password}
-            onChange={(e)=>setPassword(e.target.value)}
-            className="bg-[#eeeeee] mb-7 rounded px-4 w-full text-lg placeholder:text:base py-4"
-            placeholder="password"
-          />
-          <button className="bg-[#111] text-white mb-7 font-semibold rounded px-4 w-full text-lg placeholder:text:base py-4">
-            login
-          </button>
-          <p>New here? <Link  to='/signup' className='text-blue-600'>Create New account</Link></p>
-        </form>
-      </div>
+        <h3 className='text-lg font-medium mb-2'>Enter Password</h3>
 
-      <div>
-        <Link to='/captain-login' className="bg-[#10b461] flex items-center justify-center  text-white mb-7 font-semibold rounded px-4 w-full text-lg placeholder:text:base py-4">Sign in as captain</Link>
-      </div>
+        <input
+          className='bg-[#eeeeee] mb-7 rounded-lg px-4 py-2 border w-full text-lg placeholder:text-base'
+          value={password}
+          onChange={(e) => {
+            setPassword(e.target.value)
+          }}
+          required type="password"
+          placeholder='password'
+        />
+
+        <button
+          className='bg-[#111] text-white font-semibold mb-3 rounded-lg px-4 py-2 w-full text-lg placeholder:text-base'
+        >Login</button>
+
+      </form>
+      <p className='text-center'>New here? <Link to='/signup' className='text-blue-600'>Create new Account</Link></p>
     </div>
-  );
-};
+    <div>
+      <Link
+        to='/captain-login'
+        className='bg-[#10b461] flex items-center justify-center text-white font-semibold mb-5 rounded-lg px-4 py-2 w-full text-lg placeholder:text-base'
+      >Sign in as Captain</Link>
+    </div>
+  </div>
 
-export default UserLogin;
+  )
+}
+
+export default UserLogin
