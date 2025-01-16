@@ -1,18 +1,15 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
-function ComfireRidingPopup(props) {
-  const [OTP, setOtp]=useState('')
-  const submitHander=(e)=>{
-    
-e.preventDefault()
-  }
+const FinishRide = (props) => {
   return (
     <div className='h-screen'>
-   
-    <h3 className="text-2xl font-semibold mb-5">Confirm this ride to start</h3>
+   <h5 className='p-1 text-center w-[95%] absolute top-0' onClick={() => {
+                setFinish(false)
+            }}><i className="text-3xl text-gray-200 ri-arrow-down-wide-line"></i></h5>
+    <h3 className="text-2xl font-semibold mb-5">Finish this Ride </h3>
 
     {/* Driver Info */}
-    <div className="flex items-center justify-between p-3 bg-yellow-400 rounded-xl mt-4">
+    <div className="flex items-center justify-between p-3 border-2  bg-yellow-400 rounded-xl mt-4">
       <div className="flex items-center gap-3">
         <img
           className="h-12 rounded-full object-cover w-12"
@@ -56,27 +53,16 @@ e.preventDefault()
 
       
      <div className='mt-6 w-full'>
-     <form onSubmit={(e)=>submitHander(e)}>
-     <input value={OTP} onChange={(e) => setOtp(e.target.value)} type="text" className='bg-[#eee] px-6 py-4 font-mono text-lg rounded-lg w-full mt-3' placeholder='Enter OTP' />
-
+    
 
      <Link
-        to='/captain-riding'
-        className="w-full mt-5 flex justify-center bg-green-600 text-white font-semibold p-2 rounded-lg"
+        to='/captain-home'
+        className="w-full mt-5 flex justify-center text-lg bg-green-600 text-white font-semibold p-2 rounded-lg"
       >
-        Confirm
+        Finish Ride
       </Link>
-      <button
-        onClick={() => {
-          props.setConfirmRidePopupPanel(false)
-          props.setRidePopupPanel(false)
-          // Placeholder for actual functionality
-        }}
-        className="w-full mt-1 bg-red-500 text-white text-black font-semibold p-2 rounded-lg"
-        >
-          Cancel
-      </button>
-     </form>
+      <p className='mt-10 text-xs'>click on finish ride  button if you have completed the payment.</p>
+     
      </div>
      
     </div>
@@ -84,5 +70,4 @@ e.preventDefault()
   )
 }
 
-export default ComfireRidingPopup
-
+export default FinishRide

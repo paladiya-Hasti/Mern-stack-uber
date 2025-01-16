@@ -11,6 +11,8 @@ import CaptainSignup from './pages/Captainsignup'
 import CaptainHome from './pages/CaptainHome'
 import Home from './pages/Home'
 import Riding from './pages/Riding'
+import CaptainRiding from './pages/CaptainRiding'
+import 'remixicon/fonts/remixicon.css'
 const App = () => {
 
  const ans=useContext(UserDataContext)
@@ -27,7 +29,8 @@ const App = () => {
         <Route path='/captain-login' element={<Captainlogin/>}></Route>
         <Route path='/home' element={<UserprotectedWrapper><Home/></UserprotectedWrapper>}></Route>
         <Route path='/user/logout' element={<UserprotectedWrapper><Userlogout></Userlogout></UserprotectedWrapper>}></Route>
-        <Route path='captain-home' element={<CaptainHome/>}></Route>
+        <Route path='captain-home' element={<CaptainHome/>}></Route>\
+        <Route path='/captain-riding' element={<CaptainRiding></CaptainRiding>}></Route>
         </Routes>
     </div>
   )

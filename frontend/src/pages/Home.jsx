@@ -7,6 +7,7 @@ import VehiclePanel from "../componets/VehiclePanel";
 import ComformRide from "../componets/ComformRide";
 import LookingForDriver from "../componets/LookingForDriver";
 import WaitingForDriver from "../componets/WaitForDriver";
+import RidePopUp from "../componets/RidePopUp";
 
 const Home = () => {
   const [pickup, setPickup] = useState('');
@@ -130,7 +131,7 @@ useGSAP(function () {
             <i className="ri-arrow-down-s-line"></i>
           </h5>
           <h4 className="text-2xl font-semibold">Find a trip</h4>
-          {/* <form onSubmit={submitHandler}>
+          <form onSubmit={submitHandler}>
             <div className="line absolute h-16 w-1 top-[70%] left-10 bg-gray-900 rounded-full"></div>
             <input
               onClick={() => setPanelOpen(true)}
@@ -148,7 +149,7 @@ useGSAP(function () {
               type="text"
               placeholder="Enter your destination"
             />
-          </form> */}
+          </form>
         </div>
         <div ref={panelRef} className="bg-white py-8 h-screen">
           <LocationSearchPanel
@@ -183,6 +184,7 @@ useGSAP(function () {
       >
     <WaitingForDriver waitingForDriver={waitingForDriver}/>
       </div>
+      
     </div>
   );
 };

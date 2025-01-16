@@ -8,8 +8,8 @@ import ComfireRidingPopup from "../componets/comfireRidingPopup";
 
 
 const CaptainHome = () => {
-  const [ridePopupPanel, setRidePopupPanel] = useState(false);
-  const [ confirmRidePopupPanel, setConfirmRidePopupPanel ] = useState(true)
+  const [ridePopupPanel, setRidePopupPanel] = useState(true);
+  const [ confirmRidePopupPanel, setConfirmRidePopupPanel ] = useState(false)
   const ridePopuppanelRef = useRef(null);
   const confirmRidePoupPanelRef= useRef(null)
   useGSAP(
@@ -41,7 +41,7 @@ const CaptainHome = () => {
     [confirmRidePopupPanel]
   );
   return (
-    <div className="h-screen">
+    <div>
       <div className="fixed p-6 top-0 flex items-center justify-between w-screen">
         <img
           className="w-16"
@@ -67,19 +67,24 @@ const CaptainHome = () => {
       </div>
       <div
         ref={ridePopuppanelRef}
-        className="fixed w-full z-10 mt-4   bottom-0  
-        bg-white px-3 py-10 pt-12"
+        className="fixed w-full z-10 mt-4 bottom-0  
+        bg-white translate-y-full px-3 py-10 pt-12"
       >
-        <RidePopUp setRidePopupPanel={setRidePopupPanel} />
+        <RidePopUp setRidePopupPanel={setRidePopupPanel}  setConfirmRidePopupPanel={setConfirmRidePopupPanel}  />
       </div>
+     
       <div
-        className="fixed w-full z-10 mt-4   bottom-0  
+      ref={confirmRidePoupPanelRef}
+        className="fixed w-full mt-4  h-screen translate-y-full  bottom-0  
         bg-white px-3 py-10 pt-12"
       >
-       <ComfireRidingPopup setConfirmRidePopupPanel={setConfirmRidePopupPanel} setRidePopupPanel={setRidePopupPanel}  />
+       <ComfireRidingPopup   setConfirmRidePopupPanel={setConfirmRidePopupPanel}  setRidePopupPanel={setRidePopupPanel}/> 
       </div>
+     
+      
     </div>
   );
 };
 
 export default CaptainHome;
+

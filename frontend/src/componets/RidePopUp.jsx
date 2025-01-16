@@ -55,23 +55,28 @@ const RidePopUp = (props) => {
           </div>
         </div>
 
-        {/* Buttons */}
-        <button
+       
+       <div className="flex w-full items-center justify-between">
+       <button
           onClick={() => {
-            props.setConfirmRidePanel(true);
+            props.setRidePopupPanel(false); 
           }}
-          className="w-full mt-5 bg-green-600 text-white font-semibold p-2 rounded-lg"
-        >
-          Accept
-        </button>
-        <button
-          onClick={() => {
-            props.setRidePopupPanel(false); // Placeholder for actual functionality
-          }}
-          className="w-full mt-5 bg-gray-300 text-black font-semibold p-2 rounded-lg"
+          className="mt-5 bg-gray-300 text-black font-semibold p-3 px-10 rounded-lg"
         >
           Ignore
         </button>
+       <button
+          onClick={() => {
+            props.setConfirmRidePopupPanel(true)
+    
+          }}
+          className="mt-5 bg-green-600 text-white font-semibold p-3  px-10 rounded-lg"
+        >
+          Accept
+        </button>
+        
+        
+       </div>
       </div>
     </div>
   );
